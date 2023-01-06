@@ -8,6 +8,15 @@ module.exports = {
         main: "./index.js",
         analytics: "./analytics.js"
     },
+    resolve: {
+        extensions: [".js", ".json", ".png"],
+        alias: {}
+    },
+    optimization: {
+        splitChunks: {
+            chunks: "all"
+        }
+    },
     output: {
         filename: "[name].[contenthash].js",
         path: path.resolve(__dirname, "dist")
@@ -24,10 +33,10 @@ module.exports = {
                 test: /\.css$/, use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(png|jpg|svg|gif)$/, type: 'asset/resource'
+                test: /\.(png|jpg|svg|gif)$/, type: "asset/resource"
             },
             {
-                test: /\.(ttf|woff|woff2|eot)$/, type: 'asset/resource'
+                test: /\.(ttf|woff|woff2|eot)$/, type: "asset/resource"
             },
             {
                 test: /\.xml$/, use: ["xml-loader"]

@@ -1,8 +1,10 @@
+import * as $ from "jquery"
+
 //сторонний скрипт, который будет считать клики по документу
 
 function createAnalytics() {
     let counter = 0
-    let destroyed = false
+    let isDestroyed = false
 
     const listener = () => counter++
     document.addEventListener("click", listener)
