@@ -1,3 +1,17 @@
+@import "roboto.css";
+@import "~normalize.css";
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
 .container {
-    color: red;
+    color: green;
+}
+
+.logo {
+    background-image: url("../assets/webpack-logo.png");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
 }
