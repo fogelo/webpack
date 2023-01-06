@@ -4,7 +4,8 @@
   "description": "webpack cheatsheet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [
     "js",

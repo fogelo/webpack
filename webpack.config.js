@@ -3,7 +3,6 @@ const HTMLWebpackPlugin = require("html-webpack-plugin")
 const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 
 module.exports = {
-    mode: "development",
     entry: {
         main: "./src/index.js",
         analytics: "./src/analytics.js"
