@@ -1,5 +1,6 @@
 import * as $ from "jquery"
 import Post from "./Post";
+import async from "./async"
 import * as styles from "./styles/styles.css"
 import json from "./assets/json"
 import WebpackLogo from "./assets/webpack-logo"
@@ -17,3 +18,5 @@ console.log(styles)
 console.log(xml)
 
 console.log(csv)
+
+async()

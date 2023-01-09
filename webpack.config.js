@@ -4,6 +4,9 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const MiniCssWebpackPlugin = require("mini-css-extract-plugin")
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+
 
 const isDev = process.env.NODE_ENV === "development"
 console.log("isDev", isDev)
@@ -55,7 +58,8 @@ module.exports = {
         new MiniCssWebpackPlugin({
             filename: "styles.css"
         }),
-        new CssMinimizerPlugin()
+        new CssMinimizerPlugin(),
+        // new BundleAnalyzerPlugin()
     ],
     module: {
         rules: [
@@ -80,6 +84,16 @@ module.exports = {
             {
                 test: /\.csv$/, use: ["csv-loader"]
             },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
         ]
     }
 }
