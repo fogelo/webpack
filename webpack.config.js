@@ -2,6 +2,11 @@ const path = require("path")
 const HTMLWebpackPlugin = require("html-webpack-plugin")
 const {CleanWebpackPlugin} = require("clean-webpack-plugin")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
+const MiniCssWebpackPlugin = require("mini-css-extract-plugin")
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
+const isDev = process.env.NODE_ENV === "development"
+console.log("isDev", isDev)
 
 module.exports = {
     context: path.resolve(__dirname, "src"),
@@ -24,8 +29,8 @@ module.exports = {
         },
         compress: true,
         port: 8080,
-        hot: true,
-        open: true,
+        hot: isDev,
+        // open: true,
     },
     output: {
         filename: "[name].[contenthash].js",
@@ -33,7 +38,10 @@ module.exports = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: "./index.html"
+            template: "./index.html",
+            minify: {
+                collapseWhitespace: !isDev
+            }
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({
@@ -43,12 +51,22 @@ module.exports = {
                     to: path.resolve(__dirname, "dist")
                 }
             ]
-        })
+        }),
+        new MiniCssWebpackPlugin({
+            filename: "styles.css"
+        }),
+        new CssMinimizerPlugin()
     ],
     module: {
         rules: [
             {
-                test: /\.css$/, use: ["style-loader", "css-loader"]
+                test: /\.css$/, use: [
+                    {
+                        loader: MiniCssWebpackPlugin.loader,
+                        // options: {
+                        // }
+                    },
+                    "css-loader"]
             },
             {
                 test: /\.(png|jpg|svg|gif)$/, type: "asset/resource"
